@@ -77,8 +77,10 @@ const styles = StyleSheet.create({
     width: 250,
     color: '#333',
     textAlign: 'center',
-    margin:13,
-    marginBottom: 10,
+    marginBottom:18,
+    fontWeight:'500',
+    lineHeight:22
+    
   },
   graph: {
     width: 300,
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    height: 60,
+    height: 50,
   },
   button: {
     flex: 1,

@@ -8,7 +8,7 @@ const AppDeveloper = () => {
     <View style={styles.card}>
       <View style={styles.header}>
         <Text style={styles.heading}>App Developer</Text>
-        <Text style={styles.subHeading}>John Doe</Text>
+        <Text style={styles.subHeading}>Harjinder Singh</Text>
       </View>
       <View style={styles.content}>
         <Image
@@ -16,7 +16,7 @@ const AppDeveloper = () => {
           style={styles.image}
         />
         <Text style={styles.description}>
-          John Doe is a skilled app developer with expertise in creating
+        Harjinder Singh is a skilled app developer with expertise in creating
           high-quality mobile applications. He is passionate about delivering
           exceptional user experiences and leveraging cutting-edge technologies.
         </Text>
