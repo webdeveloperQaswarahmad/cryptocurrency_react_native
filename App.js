@@ -17,6 +17,7 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   const [location, setLocation] = useState();
   const [address, setAddress] = useState();
+  const [country, setCountry] = useState('');
 
   useEffect(() => {
     requestLocationPermission();
@@ -54,26 +55,33 @@ const App = () => {
     setLocation(currentLocation);
     console.log("Location:");
     console.log(currentLocation);
+
+    reverseGeocode(currentLocation.coords.latitude, currentLocation.coords.longitude);
   };
 
-  const geocode = async () => {
-    const geocodedLocation = await Location.geocodeAsync(address);
-    console.log("Geocoded Address:");
-    console.log(geocodedLocation);
-  };
-
-  const reverseGeocode = async () => {
+  const reverseGeocode = async (latitude, longitude) => {
     const reverseGeocodedAddress = await Location.reverseGeocodeAsync({
-      longitude: location.coords.longitude,
-      latitude: location.coords.latitude
+      latitude,
+      longitude
     });
 
     console.log("Reverse Geocoded:");
     console.log(reverseGeocodedAddress);
+
+    // Extracting country name from the reverse geocoded result
+    const countryName = reverseGeocodedAddress[0]?.country || '';
+    setCountry(countryName);
   };
 
+  const geocode = async () => {
+    if (address) {
+      const geocodedLocation = await Location.geocodeAsync(address);
+      console.log("Geocoded Address:");
+      console.log(geocodedLocation);
+    }
+  };
+  
   return (
-    
     <NavigationContainer>
       <Drawer.Navigator
         drawerStyle={{
@@ -85,20 +93,13 @@ const App = () => {
           inactiveTintColor: '#777', // Set the inactive item text color
         }}
       >
-        <Drawer.Screen name="CryptoCurrency">
-          {props => (
-            <Home
-              {...props}
-              location={location}
-              address={address}
-              setAddress={setAddress}
-              geocode={geocode}
-              reverseGeocode={reverseGeocode}
-            />
-          )}
+        <Drawer.Screen name="Home">
+          {props => <Home {...props} country={country} />}
         </Drawer.Screen>
         <Drawer.Screen name="LiveTrading" component={LiveTrading} />
-        <Drawer.Screen name="About" component={About} />
+        <Drawer.Screen name="About">
+          {props => <About {...props} country={country} />}
+        </Drawer.Screen>
         <Drawer.Screen name="AppDeveloper" component={AppDeveloper} />
       </Drawer.Navigator>
     </NavigationContainer>
