@@ -93,7 +93,7 @@ const App = () => {
           inactiveTintColor: '#777', // Set the inactive item text color
         }}
       >
-        <Drawer.Screen name="Home">
+        <Drawer.Screen name="Cryptocurrency">
           {props => <Home {...props} country={country} />}
         </Drawer.Screen>
         <Drawer.Screen name="LiveTrading" component={LiveTrading} />
